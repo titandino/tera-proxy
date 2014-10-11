@@ -182,7 +182,7 @@ module.exports = _module = {
         return console.error("invalid message type " + (typeof message));
     }
     if (reader.constructor === Buffer) {
-      reader = new stream.readable(reader, 4);
+      reader = new stream.Readable(reader, 4);
     }
     count = {};
     offset = {};
@@ -251,7 +251,7 @@ module.exports = _module = {
     }
     if (writer == null) {
       length = 4 + getLength(message, data);
-      writer = new stream.writable(length);
+      writer = new stream.Writeable(length);
       writer.uint16(length);
       writer.uint16(code);
     }
