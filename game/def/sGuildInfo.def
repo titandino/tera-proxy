@@ -1,0 +1,20 @@
+count  ranks
+offset ranks
+offset name
+offset title
+offset master
+offset motd
+offset unk
+offset ad
+
+string name
+string title
+string master
+string motd
+string unk
+string ad
+array  ranks
+- offset name
+- uint32 id
+- uint32 permissions
+- string name

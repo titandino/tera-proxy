@@ -1,0 +1,12 @@
+{
+  "name": "tera-proxy-sls",
+  "version": "0.0.1",
+  "description": "Adds servers to the EME TERA server list.",
+  "main": "index.js",
+  "author": "meishu",
+  "license": "MIT",
+  "dependencies": {
+    "http-proxy": "~1.1.1",
+    "native-dns": "~0.4.1"
+  }
+}

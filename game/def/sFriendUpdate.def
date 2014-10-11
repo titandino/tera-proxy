@@ -1,0 +1,11 @@
+count  friends
+offset friends
+array  friends
+- uint32 id
+- int32  level
+- int32  status
+- uint32 location1
+- uint32 location2
+- uint32 location3
+- byte   unk1
+- int16  unk2

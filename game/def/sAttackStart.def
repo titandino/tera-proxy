@@ -1,0 +1,14 @@
+﻿count  effects
+offset effects
+
+uint64 source
+float  x
+float  y
+float  z
+int16  w
+uint32 model
+uint32 skill
+uint32 stage
+float  speed
+uint32 id
+float  unk

@@ -1,0 +1,24 @@
+count  members
+offset members
+
+byte last
+byte first
+byte unk
+array members
+- offset name
+- offset note
+- uint32 playerID
+- uint32 location1
+- uint32 location2
+- uint32 location3
+- uint32 rank
+- int32  level
+- int32  race
+- int32  class
+- int32  gender
+- int32  status
+- int32  lastOnline
+- int32  unk1
+- byte   unk2
+- string name
+- string note

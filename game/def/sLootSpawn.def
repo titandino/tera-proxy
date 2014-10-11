@@ -1,0 +1,14 @@
+count  owners
+offset owners
+
+uint64 id
+float  x
+float  y
+float  z
+uint32 item
+uint32 amount
+int32  expiry
+# ? (10 bytes)
+# uint64 mob
+array  owners
+- uint64 id

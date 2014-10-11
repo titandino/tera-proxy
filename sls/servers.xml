@@ -1,0 +1,17 @@
+<server>
+  <id>4009</id>
+  <ip>127.0.0.1</ip>
+  <port>9247</port>
+  <category sort="1">PVE</category>
+  <name raw_name="Celestial Thrills">
+    <![CDATA[Celestial Thrills]]>
+  </name>
+  <crowdness sort="1">None</crowdness>
+  <open sort="3">High</open>
+  <permission_mask>0x00000000</permission_mask>
+  <server_stat>0x00000000</server_stat>
+  <popup>
+    <![CDATA[This server isn't up yet!]]>
+  </popup>
+  <language>en</language>
+</server>

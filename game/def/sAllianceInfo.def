@@ -1,0 +1,25 @@
+count  vaults
+offset vaults
+offset exarchName
+offset exarchGuild
+
+int32  faction
+byte   unk1 # hasExarch?
+uint64 time
+uint64 vaultsStart
+uint64 termEnd
+uint64 termStart
+uint64 vaultsEnd
+int32  unk2
+int32  unk3 # has vaults?
+byte   unk4 # extractor competition?
+byte   unk5 # (maybe conflict?)
+uint64 conflictStart
+uint64 conflictEnd
+int32  unk6
+int32  unk7
+string exarchName
+string exarchGuild
+array  vaults
+- int32 hour
+- int32 faction

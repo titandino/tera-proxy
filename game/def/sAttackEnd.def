@@ -1,0 +1,9 @@
+﻿uint64 source
+float  x
+float  y
+float  z
+int16  w
+uint32 model
+uint32 skill
+int32  unk
+uint32 id

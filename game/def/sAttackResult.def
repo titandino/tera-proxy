@@ -1,0 +1,30 @@
+count  unk11
+offset unk11
+
+uint64 source
+uint64 target
+uint32 model
+uint32 skill
+uint32 stage
+int32  unk1
+uint32 id
+int32  time
+uint32 damage
+uint16 type
+uint16 type2
+uint16 crit
+byte   unk2
+byte   unk3
+int32  unk4
+int32  unk5
+int16  unk6
+int32  unk7
+int32  unk8
+int32  unk9
+int32  unk10
+
+array  unk11
+- int32 unk1
+- float unk2
+- float unk3
+- float unk4
