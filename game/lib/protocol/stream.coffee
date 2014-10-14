@@ -1,3 +1,7 @@
+class Int64
+  constructor: (@low, @high) ->
+  equals: (n) -> @low is n.low and @high is n.high
+
 module.exports =
   Readable: class Readable
     constructor: (@buffer, @position = 0) ->
@@ -25,8 +29,7 @@ module.exports =
       ret
 
     uint64: ->
-      low: @uint32()
-      high: @uint32()
+      new Int64 @uint32(), @uint32()
 
     int16: ->
       ret = @buffer.readInt16LE @position
@@ -39,8 +42,7 @@ module.exports =
       ret
 
     int64: ->
-      low: @uint32()
-      high: @int32()
+      new Int64 @uint32(), @int32()
 
     float: ->
       ret = @buffer.readFloatLE @position
