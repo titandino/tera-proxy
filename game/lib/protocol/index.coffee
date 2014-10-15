@@ -206,6 +206,9 @@ module.exports = _module =
       when 'string'
         code = _module.map.name[message]
         message = _module.messages[message]
+
+        if !code?
+          return console.error "code not known for message '#{message}'"
       when 'number'
         code = message
         message = _module.messages[_module.map.code[message]]
