@@ -1,112 +1,116 @@
-#cVersion
-#sVersionCheck
-#cAuthenticate
-#sAuthenticate
-#cGetCharacters
-#sCharacterList
-#cSelectCharacter
+cVersion 4DBC
+sVersionCheck 4DBD
 
-cWhisper     97A3
+cAuthenticate D07D
+sAuthenticate BFEF
+sServerInfo CDBE
+cGetCharacters D488
+sCharacterList F541
+cSelectCharacter E2D7
+
+cWhisper 97A3
+sWhisper FD16
+cChatMessage AF5F
 sChatMessage 95DA
+sSystemMessage FAF4
 
+cChargeSkill B56B
+cEmote A72F
+cGetImage 9CCB
 cMove C8EE
-sPlayerInfo CAD9
-sSelfInfo B314
-sPlayerOutfit EBC4
-sPlayerMove B12C
+cUseSkill 949B
+sAbnormalAdd B5B1
+sAbnormalRemove E6FF
+sAllianceInfo 6A01
+sAttackEnd 687E
+sAttackResult C613
+sAttackStart D2B1
+sCharacterAnimation 9E40
+sChargedSkill BD64
+sConditionActivate 922C
+sConditionAdd BD4D
+sConditionList 6143
+sConditionRemove 5D3D
+sCooldownSkill 9A45
+sGuildBankLog 8ACF
+sGuildHistory 76B0
+sGuildInfo ABEC
+sGuildMembers CF77
+sGuildMotd D2C9
+sImage A2D6
 sInventory A85C
+sLfgMessage F1DB
+sNpcDespawn F514
+sNpcInfo 966E
+sNpcMove C07B
+sPartyAbnormalList 8770
+sPartyList E459
+sPartyMove CA29
+sPartyUpdateHp 7B5F
+sPlayerInfo CAD9
+sPlayerMove B12C
+sPlayerOutfit EBC4
+sPlayerUnload AC58
+sSelfInfo B314
+sTargetInfo 7E83
+sUpdateHp C10B
+sUpdateMp 6FBD
+sUpdateStats AD95
 
-#cGetImage
-#sAbnormalAdd
-#sAllianceInfo
-#sAttackResult
-#sAttackStart
-#sConditionActivate
-#sConditionAdd
-#sConditionList
-#sConditionRemove
-#sImage
-#sNpcAnimation
-#sNpcInfo
-#sNpcMove
-#sPartyAbnormalList
-#sPartyConditionActivate
-#sPartyConditionAdd
-#sPartyConditionRemove
-#sPartyList
-#sPartyUpdateHp
-#sPartyUpdateMp
-#sUpdateHp
-#sUpdateMp
-#sUpdateRe
-#sLfgMessage
-#sLootSpawn
-
-#cEmote
 #cGetAllianceStandings
 #cGetFriends
 #cGetGuildApps
 #cGetGuildInfo
-#cUseSkill
-#sAbnormalRemove
 #sAbnormalUpdate
 #sAbsorbDamage
 #sAllianceStandings
-#sAttackEnd
-#sEmote
 #sFriendAdd
 #sFriendList
 #sFriendRemove
 #sFriendUpdate
 #sGuildApps
-#sGuildInfo
-#sGuildMembers
+#sLootSpawn
 #sLootWindow
 #sNpcCombatStatus
-#sNpcDespawn
 #sNpcEmotion
 #sNpcHp
 #sNpcStatus
 #sPartyAbnormalAdd
 #sPartyAbnormalRemove
 #sPartyAbnormalUpdate
+#sPartyConditionActivate
+#sPartyConditionAdd
+#sPartyConditionRemove
 #sPartyDeath
-#sPartyMove
+#sPartyUpdateMp
 #sPlayerPosition
-#sPlayerUnload
 #sProjectedAttack
 #sProjectedAttackRemove
 #sProjectile
 #sProjectileRemove
-#sSystemMessage
-#sTargetInfo
-#sWhisper
+#sUpdateRe
 
 #
 # NOT YET IMPLEMENTED
 #
 
 #cLockon
-#sCampfire
-#sLockon
-#sNpcMessage
-#sPartyUpdate
-
 #sAttackHoming
+#sCampfire
 #sCombatStatus
 #sCooldownItem
-#sCooldownSkill
 #sGlyphs
 #sLifeStatus
 #sLockedOn
+#sLockon
 #sLootQueue
 #sLootReceived
 #sLootRemove
 #sLootRoll
 #sLootStatus
 #sLootWon
+#sNpcMessage
 #sPartyInvitePriv
 #sPartyLeader
 #sPartyUpdateRe
 #sSelfStamina
-#sUpdateStats

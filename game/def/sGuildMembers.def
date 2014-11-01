@@ -17,8 +17,7 @@ array members
 - int32  class
 - int32  gender
 - int32  status
-- int32  lastOnline
-- int32  unk1
-- byte   unk2
+- int64  lastOnline
+- byte   unk1
 - string name
 - string note

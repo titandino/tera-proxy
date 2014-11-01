@@ -6,6 +6,8 @@ byte   unk1
 byte   unk2
 byte   unk3
 int32  size
+int32  itemLevelInventory
+int32  itemLevel
 int32  unk4
 int32  unk5
 int32  unk6
@@ -47,4 +49,5 @@ array items
 - int32  unk28
 - int32  unk29
 - int16  unk30
-#- array unk # I don't think I did nested arrays yet
+- array unk
+- - int32 unk

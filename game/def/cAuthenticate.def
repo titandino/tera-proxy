@@ -1,0 +1,9 @@
+offset name
+offset ticket
+count  ticket
+
+int32  unk1
+byte   unk2
+int32  unk3
+string name
+bytes  ticket

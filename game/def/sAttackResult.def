@@ -1,5 +1,5 @@
-count  unk11
-offset unk11
+count  unk6
+offset unk6
 
 uint64 source
 uint64 target
@@ -13,17 +13,17 @@ uint32 damage
 uint16 type
 uint16 type2
 uint16 crit
+byte   knockdown
 byte   unk2
-byte   unk3
-int32  unk4
-int32  unk5
-int16  unk6
-int32  unk7
-int32  unk8
-int32  unk9
-int32  unk10
+float  x
+float  y
+float  z
+int16  w
+int32  unk3 # effect type?
+int32  unk4 # always 0?
+int32  attackid
 
-array  unk11
+array  unk6
 - int32 unk1
 - float unk2
 - float unk3
