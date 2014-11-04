@@ -83,9 +83,8 @@ module.exports = _module =
       data = fs.readFileSync filepath, encoding: 'utf8'
 
       message = []
-      array =
-        key: null
-        members: []
+      order = []
+      top = message
 
       name = path.basename file, '.def'
       for line, i in data.split /\r?\n/
@@ -93,46 +92,27 @@ module.exports = _module =
         line = line.trim()
         continue if line is ''
 
-        line = line.match /^(-?)\s*(\S+)\s*(\S+)$/
+        line = line.match /^((?:\s*-)*)?\s*(\S+)\s*(\S+)$/
         if !line
           console.error "parse error: malformed line (#{name}:#{i})"
           return false
+
+        [_, depth, type, key] = line
+
+        depth = depth?.replace(/[^-]/g, '').length ? 0
+        if depth > order.length
+          if depth isnt order.length + 1
+            console.error "parse error: rolling in the deep (#{name}:#{i})"
+
+          id = top.length - 1
+          top = top[id][1]
+          order.push id
         else
-          [_, inArray, type, key] = line
+          order.pop() while depth < order.length
+          top = message
+          top = top[i][1] for i in order
 
-          if inArray
-            if !array.key?
-              console.error "parser error: not in array (#{name}:#{i})"
-              return false
-
-            array.members.push [key, type]
-          else
-            if array.key?
-              if array.members.length is 0
-                console.error "parser error: empty array (#{name}:#{i})"
-                return false
-
-              message.push [array.key, array.members]
-              array.key = null
-              array.members = []
-
-            if type is 'array'
-              if inArray
-                console.error "parser error: nested array (#{name}:#{i})"
-                return false
-
-              array.key = key
-            else
-              message.push [key, type]
-
-      if array.key?
-        if array.members.length is 0
-          console.error "parser error: empty array (#{name}:#{i})"
-          return false
-
-        message.push [array.key, array.members]
-        array.key = null
-        array.members = []
+        top.push [key, if type is 'array' then [] else type]
 
       messages[name] = message
       console.warn "[protocol] unmapped message '#{name}'" if !map.name[name]?
