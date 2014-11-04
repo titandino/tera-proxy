@@ -1,6 +1,8 @@
+# never changes
 cVersion 4DBC
 sVersionCheck 4DBD
 
+# login sequence
 cAuthenticate D07D
 sAuthenticate BFEF
 sServerInfo CDBE
@@ -8,19 +10,20 @@ cGetCharacters D488
 sCharacterList F541
 cSelectCharacter E2D7
 
+# command/response
 cWhisper 97A3
-sWhisper FD16
-cChatMessage AF5F
 sChatMessage 95DA
-sSystemMessage FAF4
 
+# everything else
 cChargeSkill B56B
+cChatMessage AF5F
 cEmote A72F
 cGetImage 9CCB
 cMove C8EE
 cUseSkill 949B
 sAbnormalAdd B5B1
 sAbnormalRemove E6FF
+sAbnormalUpdate 7C04
 sAllianceInfo 6A01
 sAttackEnd 687E
 sAttackResult C613
@@ -32,6 +35,7 @@ sConditionAdd BD4D
 sConditionList 6143
 sConditionRemove 5D3D
 sCooldownSkill 9A45
+sFriendList D3A0
 sGuildBankLog 8ACF
 sGuildHistory 76B0
 sGuildInfo ABEC
@@ -40,28 +44,38 @@ sGuildMotd D2C9
 sImage A2D6
 sInventory A85C
 sLfgMessage F1DB
+sLootSpawn 6DFA
+sLootWindow 8556
 sNpcDespawn F514
 sNpcInfo 966E
 sNpcMove C07B
+sPartyAbnormalAdd AE49
 sPartyAbnormalList 8770
+sPartyAbnormalUpdate F405
+sPartyConditionAdd 5689
 sPartyList E459
 sPartyMove CA29
-sPartyUpdateHp 7B5F
+sPartyUpdateHp A66E
+sPartyUpdateMp 7B5F
+sPartyUpdateRe 7760
+sPartyUpdateStats 8323
 sPlayerInfo CAD9
 sPlayerMove B12C
 sPlayerOutfit EBC4
 sPlayerUnload AC58
 sSelfInfo B314
+sSystemMessage FAF4
 sTargetInfo 7E83
 sUpdateHp C10B
 sUpdateMp 6FBD
+sUpdateRe 6AC7
 sUpdateStats AD95
+sWhisper FD16
 
 #cGetAllianceStandings
 #cGetFriends
 #cGetGuildApps
 #cGetGuildInfo
-#sAbnormalUpdate
 #sAbsorbDamage
 #sAllianceStandings
 #sFriendAdd
@@ -69,20 +83,15 @@ sUpdateStats AD95
 #sFriendRemove
 #sFriendUpdate
 #sGuildApps
-#sLootSpawn
 #sLootWindow
 #sNpcCombatStatus
 #sNpcEmotion
 #sNpcHp
 #sNpcStatus
-#sPartyAbnormalAdd
 #sPartyAbnormalRemove
-#sPartyAbnormalUpdate
 #sPartyConditionActivate
-#sPartyConditionAdd
 #sPartyConditionRemove
 #sPartyDeath
-#sPartyUpdateMp
 #sPlayerPosition
 #sProjectedAttack
 #sProjectedAttackRemove
@@ -111,6 +120,4 @@ sUpdateStats AD95
 #sLootWon
 #sNpcMessage
 #sPartyInvitePriv
-#sPartyLeader
-#sPartyUpdateRe
 #sSelfStamina

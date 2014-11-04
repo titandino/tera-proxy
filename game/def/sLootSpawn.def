@@ -8,7 +8,8 @@ float  z
 uint32 item
 uint32 amount
 int32  expiry
-# ? (10 bytes)
-# uint64 mob
+int32  unk1
+int16  unk2
+uint64 mob
 array  owners
 - uint64 id
