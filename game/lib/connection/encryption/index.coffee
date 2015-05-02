@@ -7,7 +7,7 @@ cryptorKey = (@size, @pos2) ->
   @sum = 0
   @key = 0
   @pos1 = 0
-  @buffer = new Uint32Array size
+  @buffer = new Uint32Array @size
   return
 
 class Cryptor
