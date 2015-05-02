@@ -22,4 +22,5 @@ array  members
 - uint64 cID
 - int32  order
 - byte   canInvite
+- int32  unk
 - string name

@@ -4,9 +4,9 @@ int32  curMp
 int32  maxHp
 int32  maxMp
 int16  level
-int16  unk1
+int16  inCombat
 int16  vitality
-byte   status
+byte   alive # ?
 int32  stamina
 int32  curRe
 int32  maxRe

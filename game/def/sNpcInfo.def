@@ -10,7 +10,7 @@ float  z
 int16  w
 int32  unk1 # 0xC or 0xA?
 uint32 npc
-int16  unk2
+int16  type
 int16  unk3
 int16  unk4
 int16  unk5  # 0-4?

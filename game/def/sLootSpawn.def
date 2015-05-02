@@ -12,4 +12,4 @@ int32  unk1
 int16  unk2
 uint64 mob
 array  owners
-- uint64 id
+- uint32 id

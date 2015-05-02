@@ -1,13 +1,12 @@
 ﻿uint64 id
 int32  unk1
+int32  model
 float  x1
 float  y1
 float  z1
-int16  w1
 float  x2
 float  y2
 float  z2
-int16  w2
 byte   unk2
 int32  unk3
 uint64 source

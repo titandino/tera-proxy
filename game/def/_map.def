@@ -2,122 +2,58 @@
 cVersion 4DBC
 sVersionCheck 4DBD
 
-# login sequence
-cAuthenticate D07D
-sAuthenticate BFEF
-sServerInfo CDBE
-cGetCharacters D488
-sCharacterList F541
-cSelectCharacter E2D7
+cWhisper 5294
+sWhisper F2BC
+cChatMessage F5B1
+sChatMessage 76B0
+sSystemMessage 65F7
 
-# command/response
-cWhisper 97A3
-sChatMessage 95DA
+cDuelRequest 6F14
+sDuelDialog CF27
+cDuelAccept A768
+sPlayerRelation C0A6
+sDuelResult E21C
 
-# everything else
-cChargeSkill B56B
-cChatMessage AF5F
-cEmote A72F
-cGetImage 9CCB
-cMove C8EE
-cUseSkill 949B
-sAbnormalAdd B5B1
-sAbnormalRemove E6FF
-sAbnormalUpdate 7C04
-sAllianceInfo 6A01
-sAttackEnd 687E
-sAttackResult C613
-sAttackStart D2B1
-sCharacterAnimation 9E40
-sChargedSkill BD64
-sConditionActivate 922C
-sConditionAdd BD4D
-sConditionList 6143
-sConditionRemove 5D3D
-sCooldownSkill 9A45
-sFriendList D3A0
-sGuildBankLog 8ACF
-sGuildHistory 76B0
-sGuildInfo ABEC
-sGuildMembers CF77
-sGuildMotd D2C9
-sImage A2D6
-sInventory A85C
-sLfgMessage F1DB
-sLootSpawn 6DFA
-sLootWindow 8556
-sNpcDespawn F514
-sNpcInfo 966E
-sNpcMove C07B
-sPartyAbnormalAdd AE49
-sPartyAbnormalList 8770
-sPartyAbnormalUpdate F405
-sPartyConditionAdd 5689
-sPartyList E459
-sPartyMove CA29
-sPartyUpdateHp A66E
-sPartyUpdateMp 7B5F
-sPartyUpdateRe 7760
-sPartyUpdateStats 8323
-sPlayerInfo CAD9
-sPlayerMove B12C
-sPlayerOutfit EBC4
-sPlayerUnload AC58
-sSelfInfo B314
-sSystemMessage FAF4
-sTargetInfo 7E83
-sUpdateHp C10B
-sUpdateMp 6FBD
-sUpdateRe 6AC7
-sUpdateStats AD95
-sWhisper FD16
+sPlayerPosition E714
+sSelfInfo B5AF
 
-#cGetAllianceStandings
-#cGetFriends
-#cGetGuildApps
-#cGetGuildInfo
-#sAbsorbDamage
-#sAllianceStandings
-#sFriendAdd
-#sFriendList
-#sFriendRemove
-#sFriendUpdate
-#sGuildApps
-#sLootWindow
-#sNpcCombatStatus
-#sNpcEmotion
-#sNpcHp
-#sNpcStatus
-#sPartyAbnormalRemove
-#sPartyConditionActivate
-#sPartyConditionRemove
-#sPartyDeath
-#sPlayerPosition
-#sProjectedAttack
-#sProjectedAttackRemove
-#sProjectile
-#sProjectileRemove
-#sUpdateRe
+sAttackEnd C15C # 96 samples
+sAttackResult E32E # 147 samples
+sAttackStart 74F7 # 113 samples
+sProjectile A6A4
+sProjectileRemove 9474
 
-#
-# NOT YET IMPLEMENTED
-#
+sAbnormalAdd F329 # 6563 samples
+sAbnormalRemove D815 # 1288 samples
+sAbnormalUpdate DB94 # 369 samples
+sConditionActivate 5E4A
+sConditionAdd B9EB # 298 samples
+sConditionList 8843 # 12 samples
+sConditionRemove D3E6
+sPartyConditionActivate DCE8
+sPartyConditionAdd C1C3
+sPartyConditionRemove C403
+sNpcInfo C989 # 1454 samples
+sPlayerInfo BD9C
+sUpdateHp 6503 # 233 samples
+sNpcEmotion D8B2
+sNpcHp2 E039
+sNpcStatus F2E8
+sNpcCombatStatus E187
+sNpcEngage 5043
+sProjectedAttack D689
+sProjectedAttackRemove 9822
 
-#cLockon
-#sAttackHoming
-#sCampfire
-#sCombatStatus
-#sCooldownItem
-#sGlyphs
-#sLifeStatus
-#sLockedOn
-#sLockon
-#sLootQueue
-#sLootReceived
-#sLootRemove
-#sLootRoll
-#sLootStatus
-#sLootWon
-#sNpcMessage
-#sPartyInvitePriv
-#sSelfStamina
+sPartyList 93B2
+
+sPlayerInspect B729 # 13 samples
+sPlayerDungeonClears A6A9
+
+cGetImage D6DD # 255 samples
+sCostumeText B450 # 15 samples
+sImage BBD3 # 255 samples
+sPlayerOutfit D7BA # 406 samples
+
+cMove 8147 # 6247 samples
+sAllianceInfo B5D5 # 1025 samples
+sPlayerMove 58EB # 113435 samples

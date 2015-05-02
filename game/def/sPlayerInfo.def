@@ -50,6 +50,10 @@ int32  chestDye
 int32  glovesDye
 int32  bootsDye
 int32  unk25 # always 0?
+int32  unk26a
+int32  unk26b
+int32  unk26c
+int32  unk26d
 int32  weaponEnchant
 int16  unk27 # always 0?
 int32  level
