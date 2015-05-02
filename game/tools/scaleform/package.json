@@ -1,0 +1,8 @@
+{
+  "name": "scaleform",
+  "version": "0.0.1",
+  "author": "meishu",
+  "dependencies": {
+    "pako": "^0.2.5"
+  }
+}
