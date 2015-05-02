@@ -214,7 +214,7 @@ module.exports =
 
       trade_message: (value) ->
         match = value.match /^@(\d+)(\x0B|$)/
-        !!match and 353 <= match[1] <= 374
+        !!match and (348 <= match[1] <= 374)
 
   # probably won't ever change
   enumerable:
@@ -369,11 +369,11 @@ module.exports =
   # require non-empty array
   array:
     sConditionList: 'conditions'
+    sCostumeText: 'items'
     sFriendList: 'friends'
     sFriendUpdate: 'friends'
     sGuildBankLog: 'events'
     sGuildHistory: 'events'
-    sOutfitText: 'items'
     sPreviewItem: 'items'
 
   # custom functions
