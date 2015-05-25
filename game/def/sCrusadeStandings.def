@@ -1,0 +1,20 @@
+count  rankings
+offset rankings
+offset guild
+
+int32  category
+int32  unk1
+int32  unk2
+int32  unk3
+int64  refresh
+string guild
+
+array  rankings
+- offset name
+- offset guild
+- int32  tier
+- int32  rank
+- int32  model
+- int32  score
+- string name
+- string guild

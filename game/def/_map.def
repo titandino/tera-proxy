@@ -1,59 +1,26 @@
 # never changes
 cVersion 4DBC
 sVersionCheck 4DBD
+cAuthenticate BD4D
+sAuthenticate B77D
+sServerInfo 9C06
+cGetCharacters 88F2
+sCharacterList C59F
+cSelectCharacter C13B
 
-cWhisper 5294
-sWhisper F2BC
-cChatMessage F5B1
-sChatMessage 76B0
-sSystemMessage 65F7
+cGetGuildInfo D652
+sGuildInfo CF0C
+sGuildMembers EAEE
 
-cDuelRequest 6F14
-sDuelDialog CF27
-cDuelAccept A768
-sPlayerRelation C0A6
-sDuelResult E21C
+cInspectName F0A1
+sPlayerInspect B7E1
+cGetReputation 5CF7
+cGetDungeonClears 97C0
+sPlayerReputation 4FD7
+sPlayerDungeonClears 7C30
 
-sPlayerPosition E714
-sSelfInfo B5AF
-
-sAttackEnd C15C # 96 samples
-sAttackResult E32E # 147 samples
-sAttackStart 74F7 # 113 samples
-sProjectile A6A4
-sProjectileRemove 9474
-
-sAbnormalAdd F329 # 6563 samples
-sAbnormalRemove D815 # 1288 samples
-sAbnormalUpdate DB94 # 369 samples
-sConditionActivate 5E4A
-sConditionAdd B9EB # 298 samples
-sConditionList 8843 # 12 samples
-sConditionRemove D3E6
-sPartyConditionActivate DCE8
-sPartyConditionAdd C1C3
-sPartyConditionRemove C403
-sNpcInfo C989 # 1454 samples
-sPlayerInfo BD9C
-sUpdateHp 6503 # 233 samples
-sNpcEmotion D8B2
-sNpcHp2 E039
-sNpcStatus F2E8
-sNpcCombatStatus E187
-sNpcEngage 5043
-sProjectedAttack D689
-sProjectedAttackRemove 9822
-
-sPartyList 93B2
-
-sPlayerInspect B729 # 13 samples
-sPlayerDungeonClears A6A9
-
-cGetImage D6DD # 255 samples
-sCostumeText B450 # 15 samples
-sImage BBD3 # 255 samples
-sPlayerOutfit D7BA # 406 samples
-
-cMove 8147 # 6247 samples
-sAllianceInfo B5D5 # 1025 samples
-sPlayerMove 58EB # 113435 samples
+sPlayerOutfit C89C
+sSelfInfo AAD8
+cWhisper EF7B
+cChatMessage DEC8
+sChatMessage D7E9
