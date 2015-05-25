@@ -1,15 +1,15 @@
 net = require 'net'
 
 Encryption = require './encryption'
-CircularBuffer = require './circularBuffer'
+PacketBuffer = require './packetBuffer'
 
 module.exports = class Connection
   constructor: (@socket, @dispatch) ->
     @state = -1
     @session1 = new Encryption
     @session2 = new Encryption
-    @clientBuffer = new CircularBuffer
-    @serverBuffer = new CircularBuffer
+    @clientBuffer = new PacketBuffer
+    @serverBuffer = new PacketBuffer
 
     @socket.on 'data', (data) =>
       switch @state
@@ -29,11 +29,7 @@ module.exports = class Connection
           @session1.decrypt data
           @clientBuffer.write data
 
-          until @clientBuffer.length < 4
-            length = @clientBuffer.peek(2).readUInt16LE(0)
-            break if @clientBuffer.length < length
-
-            data = @clientBuffer.read length
+          while data = @clientBuffer.read()
             opcode = data.readUInt16LE 2
             data = @dispatch.handle opcode, data, false
             if data
@@ -79,11 +75,7 @@ module.exports = class Connection
           @session2.encrypt data
           @serverBuffer.write data
 
-          until @serverBuffer.length < 4
-            length = @serverBuffer.peek(2).readUInt16LE(0)
-            break if @serverBuffer.length < length
-
-            data = @serverBuffer.read length
+          while data = @serverBuffer.read()
             opcode = data.readUInt16LE 2
             data = @dispatch.handle opcode, data, true
             if data
