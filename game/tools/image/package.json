@@ -1,0 +1,8 @@
+{
+  "name": "tera-image",
+  "version": "0.0.1",
+  "author": "meishu",
+  "dependencies": {
+    "node-png": "^0.4.3"
+  }
+}
