@@ -11,6 +11,8 @@ module.exports = class Connection
     @clientBuffer = new PacketBuffer
     @serverBuffer = new PacketBuffer
 
+    @socket.setNoDelay true
+
     @socket.on 'data', (data) =>
       switch @state
         when 0
@@ -43,6 +45,7 @@ module.exports = class Connection
 
   connect: (opt) ->
     @client = net.connect opt
+    @client.setNoDelay true
     @client.on "connect", =>
       @remote = @socket.remoteAddress + ':' + @socket.remotePort
       console.log "[connection] routing #{@remote} to #{@client.remoteAddress}:#{@client.remotePort}"
