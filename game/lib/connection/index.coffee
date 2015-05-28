@@ -90,9 +90,11 @@ module.exports = class Connection
     @client.on "close", =>
       console.log "[connection] #{@remote} disconnected"
       @dispatch.close()
+      @socket?.end()
 
     @client.on "error", (err) ->
       console.warn err
+      @socket?.end()
 
   sendClient: (data) ->
     @session1.encrypt data if @state is 2
