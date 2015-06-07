@@ -21,12 +21,8 @@ var servers = fs.readFileSync(__dirname + '/servers.xml');
 dns.resolve(HOST, function (err, addresses) {
   if (err) {
     console.error('[DNS] error');
-    console.error(err);
-    return;
+    throw err;
   }
-
-  var ip = addresses[0];
-  console.log('sls ip:', ip);
 
   hosts.set('127.0.0.1', HOST);
   console.log('modified hosts file');
@@ -39,6 +35,9 @@ dns.resolve(HOST, function (err, addresses) {
   console.log("   * this program when you're done. *");
   console.log("   **********************************");
   console.log();
+
+  var ip = addresses[0];
+  console.log('sls ip:', ip);
 
   var proxied = proxy.createProxyServer({target: 'http://' + ip + ':' + PORT});
 
@@ -112,6 +111,7 @@ if (process.platform === 'win32') {
     input: process.stdin,
     output: process.stdout
   }).on('SIGINT', function () {
+    console.log();
     process.emit('SIGINT');
   });
 }
