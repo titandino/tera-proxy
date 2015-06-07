@@ -9,8 +9,10 @@ module.exports = class Dispatch
       pre: {}
 
   close: ->
-    for module in @modules
+    for name, module of @modules
       module.obj.destructor?()
+    @modules = {}
+    @hooks = { raw: {}, pre: {} }
     return
 
   load: (name, reload = false) ->
