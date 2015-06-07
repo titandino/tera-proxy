@@ -24,3 +24,9 @@ sSelfInfo AAD8
 cWhisper EF7B
 cChatMessage DEC8
 sChatMessage D7E9
+sCostumeText AFD2
+sPlayerInfo 8F27
+
+sInventory 6E59
+cGetTooltip 9E8E
+sItemTooltip A889

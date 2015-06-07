@@ -25,4 +25,4 @@ int32  back
 int32  weaponSkin
 int32  costume
 int32  costumeDye
-byte   enable
+byte   enable   # enables skin, hair adornment, mask, and costume (back is always on)

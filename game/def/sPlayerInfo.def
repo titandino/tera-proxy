@@ -1,5 +1,5 @@
-﻿offset unkA
-offset unkB
+﻿count  icons
+offset icons
 offset name
 offset guild
 offset guildRank
@@ -85,3 +85,6 @@ bytes  details
 string guildTitle
 string guildEmblem
 bytes  details2
+
+array  icons
+- int32 icon
