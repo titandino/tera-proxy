@@ -92,7 +92,7 @@ module.exports = class Connection
       @dispatch.close()
       @socket?.end()
 
-    @client.on "error", (err) ->
+    @client.on "error", (err) =>
       console.warn err
       @socket?.end()
 
