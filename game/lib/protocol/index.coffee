@@ -73,7 +73,11 @@ module.exports = _module =
         return false
       else
         [_, name, code] = line
-        code = parseInt code, 16
+        code = parseInt code
+        if isNaN code
+          console.error "parse error: invalid code '#{line[2]}' (#{filename}:#{i})"
+          return false
+
         map.name[name] = code
         map.code[code] = name
 
@@ -125,10 +129,22 @@ module.exports = _module =
     switch typeof message
       when 'object'
         ;
+
       when 'string'
-        message = _module.messages[message]
+        name = message
+        message = _module.messages[name]
+        if !message?
+          return console.error "unknown message '#{name}'"
+
       when 'number'
-        message = _module.messages[_module.map.code[message]]
+        code = message
+        name = _module.map.code[code]
+        if !name?
+          return console.error "unknown code #{code} (0x#{code.toString 16})"
+        message = _module.messages[name]
+        if !message?
+          return console.error "unknown message '#{name}'"
+
       else
         return console.error "invalid message type #{typeof message}"
 

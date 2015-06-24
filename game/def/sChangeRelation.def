@@ -1,2 +1,2 @@
-uint64 cid
+uint64 target
 int32  relation

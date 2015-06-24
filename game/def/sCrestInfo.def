@@ -1,8 +1,8 @@
 count  glyphs
 offset glyphs
 
-int32  pointsUsed
 int32  pointsMax
+int32  pointsUsed
 array  glyphs
 - int32 id
 - byte  enabled

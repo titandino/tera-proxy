@@ -1,5 +1,0 @@
-uint64 target
-float  hp
-byte   unk
-int32  edgeD
-float  edgeF
