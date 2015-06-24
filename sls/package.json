@@ -6,6 +6,7 @@
   "author": "meishu",
   "license": "ISC",
   "dependencies": {
-    "http-proxy": "^1.9.0"
+    "http-proxy": "^1.9.0",
+    "xmldom": "^0.1.19"
   }
 }

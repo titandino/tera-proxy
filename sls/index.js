@@ -5,6 +5,7 @@ var fs = require('fs'),
     dns = require('dns'),
     http = require('http'),
     proxy = require('http-proxy'),
+    xmldom = require('xmldom'),
     hosts = require('./hosts');
 
 /*************
@@ -13,11 +14,16 @@ var fs = require('fs'),
 var HOST = 'sls.service.enmasse.com';
 var PORT = 8080;
 
+/***********
+ * helpers *
+ ***********/
+var iterate = function(o, f) {
+  return [].slice.call(o).some(f);
+};
+
 /********
  * main *
  ********/
-var servers = fs.readFileSync(__dirname + '/servers.xml');
-
 dns.resolve(HOST, function (err, addresses) {
   if (err) {
     console.error('[DNS] error');
@@ -78,13 +84,60 @@ dns.resolve(HOST, function (err, addresses) {
       res.end = function (chunk) {
         if (chunk) data += chunk;
 
-        var index = data.indexOf('</serverlist>');
-        if (index !== -1) {
-          data = data.slice(0, index) + servers + data.slice(index);
-          console.log('* injection success\n');
-        } else {
-          console.error('* failed to inject servers\n');
-        }
+        var doc = new xmldom.DOMParser().parseFromString(data, 'text/xml');
+        iterate(doc.getElementsByTagName('server'), function(server) {
+          var done = false;
+          iterate(server.childNodes, function(node) {
+            if (node.nodeType === 1 && node.nodeName === 'id' && node.textContent === '4009') {
+              var copy = server.cloneNode(true);
+              iterate(copy.childNodes, function(n) {
+                if (n.nodeType === 1) {
+                  switch (n.nodeName) {
+                    case 'ip':
+                      n.textContent = '127.0.0.1';
+                      break;
+
+                    case 'port':
+                      n.textContent = '9247';
+                      break;
+
+                    case 'name':
+                      iterate(n.childNodes, function(c) {
+                        if (c.nodeType === 4) { // CDATA_SECTION_NODE
+                          c.data = 'Celestial Thrills';
+                          return true; // break
+                        }
+                      });
+                      iterate(n.attributes, function(a) {
+                        if (a.name === 'raw_name') {
+                          a.value = 'Celestial Thrills';
+                          return true; // break
+                        }
+                      });
+                      break;
+
+                    case 'crowdness':
+                      n.textContent = 'None';
+                      iterate(n.attributes, function(a) {
+                        if (a.name === 'sort') {
+                          a.value = '0';
+                          return true; // break
+                        }
+                      });
+                      break;
+                  }
+                }
+              });
+              server.parentNode.appendChild(copy);
+
+              done = true;
+              return done; // break
+            }
+          });
+          return done;
+        });
+
+        data = new xmldom.XMLSerializer().serializeToString(doc);
 
         write.call(res, data, 'utf8');
         end.call(res);
