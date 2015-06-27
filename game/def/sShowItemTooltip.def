@@ -17,7 +17,7 @@ int32  unk6
 int32  enchant
 int32  unk7
 int32  unk8 # boolean?
-int32  unk9
+float  unk9
 int32  unk10
 int32  unk11
 int32  unk12
@@ -68,8 +68,8 @@ int32  unk55
 int32  unk56
 int32  unk57
 byte   unk58
-byte   unk59 # boolean?
-int32  unk60
+byte   masterwork
+int32  masterworkBonus # 1%: 0, 2%: 2, 3%: 4
 byte   unk61 # boolean?
 int32  attack1
 int32  defense
@@ -89,7 +89,7 @@ int32  diffAttack
 int32  diffDefense
 int32  compareItemLevel # ?
 int32  diffBalance
-int32  remodel
+int32  unk75
 int32  unk76
 int32  unk77
 int32  unk78
@@ -102,7 +102,7 @@ int32  unk84
 int32  attack2
 int32  diffAttack2
 int32  unk85
-int32  unk86
+int32  remodel
 int32  unk87
 int32  unk88
 int32  unk89
@@ -117,11 +117,10 @@ int32  unk96
 int32  unk97
 int32  unk98
 int32  unk99
-int32  unk100
+int32  enchantmentAdvantage
 int32  unk101
 int32  unk102
-int32  unk103
-int32  unk104
+int64  averageBrokeredSale
 int32  feedstock
 int32  unk105
 int32  unk106
