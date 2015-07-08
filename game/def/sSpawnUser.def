@@ -1,5 +1,7 @@
 ﻿count  icons
 offset icons
+count  unk
+offset unk
 offset name
 offset guild
 offset guildRank
@@ -88,3 +90,6 @@ bytes  details2
 
 array  icons
 - int32 icon
+
+array  unk
+- int32 unk

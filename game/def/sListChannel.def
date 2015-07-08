@@ -1,7 +1,7 @@
 count  channels
 offset channels
 
-int32 location
+int32 unk
 int32 zone
 array channels
 - int32 channel
