@@ -42,7 +42,7 @@ int32  unk14
 byte   unk15
 int32  unk16
 int32  unk17
-int32  unk18
+int32  title
 int32  weaponModel
 int32  chestModel
 int32  glovesModel
