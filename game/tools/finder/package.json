@@ -1,8 +1,0 @@
-{
-  "name": "finder",
-  "version": "0.0.1",
-  "author": "meishu",
-  "dependencies": {
-    "glob": "^4.0.6"
-  }
-}
