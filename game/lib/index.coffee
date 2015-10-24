@@ -7,7 +7,6 @@ class proxyServer
   constructor: ->
     @server = net.createServer (socket) ->
       dispatch = new Dispatch
-      dispatch.load 'core'
       dispatch.load 'logger'
 
       proxy = new Connection socket, dispatch
