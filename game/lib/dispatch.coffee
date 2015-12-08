@@ -10,7 +10,7 @@ module.exports = class Dispatch
 
   close: ->
     for name, module of @modules
-      module.obj.destructor?()
+      module.destructor?()
     @modules = {}
     @hooks = { raw: {}, pre: {} }
     return
@@ -21,9 +21,7 @@ module.exports = class Dispatch
         delete require.cache[require.resolve name]
 
       module = require name
-      @modules[name] =
-        obj: new module this
-        hooks: []
+      @modules[name] = new module this
 
       console.log "[dispatch] loaded " + name
       true
@@ -38,11 +36,7 @@ module.exports = class Dispatch
       console.warn "[dispatch] unload: cannot unload non-loaded module '#{name}'"
       return false
 
-    module.obj.destructor?()
-
-    for hook in module.hooks
-      @unhook.apply this, hook
-
+    module.destructor?()
     delete @modules[name]
     true
 
