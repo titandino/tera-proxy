@@ -50,9 +50,10 @@ int32 curRe
 int32 maxRe
 int32 unk5
 int32 unk6
-int32 itemLevel
 int32 itemLevelInventory
+int32 itemLevel
 int32 unk7
 int32 unk8
 int32 unk9  # 0x1F40 = 8000
 int32 unk10 # 3
+int32 unk11
