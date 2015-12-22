@@ -10,5 +10,12 @@
   "bugs": {
     "url": "https://github.com/meishuu/tera-proxy/issues"
   },
-  "homepage": "https://github.com/meishuu/tera-proxy#readme"
+  "homepage": "https://github.com/meishuu/tera-proxy#readme",
+  "bundledDependencies": [
+    "tera-proxy-game",
+    "tera-proxy-sls"
+  ],
+  "scripts": {
+    "install": "cd bin && npm install"
+  }
 }

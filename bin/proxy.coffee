@@ -2,8 +2,8 @@
 fs = require 'fs'
 path = require 'path'
 
-SlsProxy = require '../sls'
-GameProxy = require '../game'
+SlsProxy = require 'tera-proxy-sls'
+GameProxy = require 'tera-proxy-game'
 
 # globals
 proxy = null
@@ -33,8 +33,8 @@ process.on 'SIGTERM', cleanExit
 
 # main
 modules = do ->
-  modulesPath = path.join __dirname, '../node_modules'
-  module for module in fs.readdirSync modulesPath when module[0] not in ['.', '_']
+  modulesPath = path.join __dirname, 'node_modules'
+  name for name in fs.readdirSync modulesPath when name[0] not in ['.', '_']
 
 proxy = new SlsProxy customServers:
   4009:
@@ -93,7 +93,7 @@ proxy?.fetch (err, servers) ->
     throw new Error 'server 4009 not found'
 
   server = GameProxy.createServer { host: target.ip, port: target.port },
-    (dispatch) -> dispatch.load module for module in modules
+    (dispatch) -> dispatch.load name, module for name in modules
 
   proxy.listen '127.0.0.1', ->
     console.log "[sls] server list overridden"
