@@ -19,7 +19,9 @@ An example server can be set up by running as administrator on Windows:
     coffee bin/proxy.coffee
 
 This will load all modules in `bin/node_modules` as long as the module's
-directory name does not begin with either `.` or `_`.
+directory name does not begin with either `.` or `_`. If you installed via npm,
+you should `cd bin && npm install` to install the dependencies for all of the
+bundled modules.
 
 Administrator is only required to modify the `hosts` file. See `tera-proxy-sls`
 for more details. Note that in this case, all modules will be executed by the
