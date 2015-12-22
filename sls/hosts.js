@@ -81,22 +81,11 @@ exports.writeFile = function (lines) {
 	try {
 		mode = fs.statSync(HOSTS).mode;
 		if (!(mode & 128)) { // 0200 (owner, write)
-			console.error();
-			console.error('*********************************');
-			console.error('*                               *');
-			console.error('*  FAILED TO WRITE HOSTS FILE!  *');
-			console.error('*  ---------------------------  *');
-			console.error('*     FILE SET TO READ-ONLY     *');
-			console.error('*                               *');
-			console.error('*********************************');
-			console.error();
-			console.error("Your hosts file seems to be set to read-only.");
-			console.error("Find this file and make sure it's writable:");
-			console.error("(Right-click, Properties, uncheck Read-only)");
-			console.error();
-			console.error('    ' + HOSTS);
-			console.error();
-			process.exit(1);
+			// FIXME generate fake EACCES
+			var err = new Error('EACCES: Permission denied');
+			err.code = 'EACCES';
+			err.path = HOSTS;
+			throw err;
 		}
 	} catch (e) {
 		if (e.code === 'ENOENT') {
@@ -107,25 +96,5 @@ exports.writeFile = function (lines) {
 	}
 
 	// Write file
-	try {
-		fs.writeFileSync(HOSTS, data, {mode: mode});
-	} catch (e) {
-		if (e.code === 'EPERM') {
-			console.error();
-			console.error('*********************************');
-			console.error('*                               *');
-			console.error('*  FAILED TO WRITE HOSTS FILE!  *');
-			console.error('*  ---------------------------  *');
-			console.error('*     RUN AS ADMINISTRATOR!     *');
-			console.error('*                               *');
-			console.error('*********************************');
-			console.error();
-			console.error("You don't have sufficient privileges to create or modify the hosts file.");
-			console.error("Please try again by right-clicking and selecting \"Run as administrator\".");
-			console.error();
-			process.exit(1);
-		} else {
-			throw e;
-		}
-	}
+	fs.writeFileSync(HOSTS, data, {mode: mode});
 };

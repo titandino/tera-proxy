@@ -1,6 +1,6 @@
 {
   "name": "tera-proxy-server",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Modular event handling through a TERA proxy server.",
   "main": "index.coffee",
   "author": "meishu",

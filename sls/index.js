@@ -1,176 +1,206 @@
+'use strict';
+
 /************
  * includes *
  ************/
-var fs = require('fs'),
-    dns = require('dns'),
-    http = require('http'),
-    proxy = require('http-proxy'),
-    xmldom = require('xmldom'),
-    hosts = require('./hosts');
+const fs = require('fs');
+const dns = require('dns');
+const http = require('http');
 
-/*************
- * constants *
- *************/
-var HOST = 'sls.service.enmasse.com';
-var PORT = 8080;
-
-/***********
- * helpers *
- ***********/
-var iterate = function(o, f) {
-  return [].slice.call(o).some(f);
-};
+const proxy = require('http-proxy');
+const xmldom = require('xmldom');
+const hosts = require('./hosts');
 
 /********
  * main *
  ********/
-dns.resolve(HOST, function (err, addresses) {
-  if (err) {
-    console.error('[DNS] error');
-    throw err;
-  }
+function SlsProxy(opts) {
+  if (!(this instanceof SlsProxy)) return new SlsProxy(opts);
 
-  hosts.set('127.0.0.1', HOST);
-  console.log('modified hosts file');
-  console.log();
-  console.log("   **********************************");
-  console.log("   * CTRL+C TO TERMINATE GRACEFULLY *");
-  console.log("   * ------------------------------ *");
-  console.log("   * You may be unable to log in if *");
-  console.log("   * you do not use Ctrl+C to close *");
-  console.log("   * this program when you're done. *");
-  console.log("   **********************************");
-  console.log();
+  if (typeof opts === 'undefined') opts = {};
+  this.host = (typeof opts.host !== 'undefined') ? opts.host : 'sls.service.enmasse.com';
+  this.port = (typeof opts.port !== 'undefined') ? opts.port : 8080;
+  this.customServers = (typeof opts.customServers !== 'undefined') ? opts.customServers : {};
 
-  var ip = addresses[0];
-  console.log('sls ip:', ip);
-
-  var proxied = proxy.createProxyServer({target: 'http://' + ip + ':' + PORT});
-
-  proxied.on('proxyReq', function (proxyReq, req, res, options) {
-    proxyReq.setHeader('Host', HOST + ':' + PORT);
-
-    if (req.url === '/servers/list.en') {
-      //res.setHeader('Content-Length', req.headers['content-length'] + servers.length);
-    }
-  });
-
-  http.createServer(function (req, res) {
-    console.log('requested:', req.url);
-
-    if (req.url[0] != '/') {
-      console.warn('* denying\n');
-      res.end();
-      return;
-    }
-
-    if (req.url === '/servers/list.en') {
-      var data = '',
-          writeHead = res.writeHead,
-          write = res.write,
-          end = res.end;
-
-      res.writeHead = function (code, headers) {
-        res.removeHeader('Content-Length');
-        if (headers) delete['content-length'];
-
-        writeHead.apply(res, arguments);
-      };
-
-      res.write = function (chunk) {
-        data += chunk;
-      };
-
-      res.end = function (chunk) {
-        if (chunk) data += chunk;
-
-        var doc = new xmldom.DOMParser().parseFromString(data, 'text/xml');
-        iterate(doc.getElementsByTagName('server'), function(server) {
-          var done = false;
-          iterate(server.childNodes, function(node) {
-            if (node.nodeType === 1 && node.nodeName === 'id' && node.textContent === '4009') {
-              var copy = server.cloneNode(true);
-              iterate(copy.childNodes, function(n) {
-                if (n.nodeType === 1) {
-                  switch (n.nodeName) {
-                    case 'ip':
-                      n.textContent = '127.0.0.1';
-                      break;
-
-                    case 'port':
-                      n.textContent = '9247';
-                      break;
-
-                    case 'name':
-                      iterate(n.childNodes, function(c) {
-                        if (c.nodeType === 4) { // CDATA_SECTION_NODE
-                          c.data = 'Celestial Thrills';
-                          return true; // break
-                        }
-                      });
-                      iterate(n.attributes, function(a) {
-                        if (a.name === 'raw_name') {
-                          a.value = 'Celestial Thrills';
-                          return true; // break
-                        }
-                      });
-                      break;
-
-                    case 'crowdness':
-                      n.textContent = 'None';
-                      iterate(n.attributes, function(a) {
-                        if (a.name === 'sort') {
-                          a.value = '0';
-                          return true; // break
-                        }
-                      });
-                      break;
-                  }
-                }
-              });
-              server.parentNode.appendChild(copy);
-
-              done = true;
-              return done; // break
-            }
-          });
-          return done;
-        });
-
-        data = new xmldom.XMLSerializer().serializeToString(doc);
-
-        write.call(res, data, 'utf8');
-        end.call(res);
-      };
-    }
-
-    proxied.web(req, res, function (err) {
-      console.warn('* error proxying request');
-      console.warn(err);
-      console.warn();
-      res.end();
-    });
-  })
-  .listen(PORT, '127.0.0.1');
-
-  console.log('listening on', PORT, '\n');
-});
-
-/************
- * shutdown *
- ************/
-if (process.platform === 'win32') {
-  require('readline').createInterface({
-    input: process.stdin,
-    output: process.stdout
-  }).on('SIGINT', function () {
-    console.log();
-    process.emit('SIGINT');
-  });
+  this.address = null;
+  this.proxy = null;
+  this.server = null;
 }
 
-process.on('SIGINT', function () {
-  hosts.remove('127.0.0.1', HOST);
-  console.log('reverted hosts file');
-  process.exit();
-});
+SlsProxy.prototype.setServers = function setServers(servers) {
+  // TODO is this a necessary method?
+  this.customServers = servers;
+};
+
+SlsProxy.prototype.fetch = function fetch(callback) {
+  const req = http.request({
+    hostname: (this.address === null) ? this.host : this.address,
+    port: this.port,
+    path: '/servers/list.en',
+  });
+
+  req.on('response', function onResponse(res) {
+    var data = '';
+    res.on('data', (chunk) => data += chunk);
+    res.on('end', function onEnd() {
+      const servers = {};
+      const doc = new xmldom.DOMParser().parseFromString(data, 'text/xml');
+      for (let server of Array.from(doc.getElementsByTagName('server'))) {
+        const serverInfo = {};
+        for (let node of Array.from(server.childNodes)) {
+          if (node.nodeType !== 1) continue;
+          switch (node.nodeName) {
+            case 'id':
+            case 'ip':
+            case 'port':
+              serverInfo[node.nodeName] = node.textContent;
+              break;
+            case 'name':
+              for (let c of Array.from(node.childNodes)) {
+                if (c.nodeType === 4) { // CDATA_SECTION_NODE
+                  serverInfo.name = c.data;
+                  break;
+                }
+              }
+              break;
+          }
+        }
+        if (serverInfo.id) {
+          servers[serverInfo.id] = serverInfo;
+        }
+      }
+
+      callback(null, servers);
+    });
+  });
+
+  req.on('error', (e) => callback(e));
+
+  req.end();
+};
+
+SlsProxy.prototype.listen = function listen(hostname, callback) {
+  const self = this;
+  dns.resolve(self.host, function resolved(err, addresses) {
+    if (err) return callback(err);
+
+    hosts.set('127.0.0.1', self.host);
+
+    const ip = self.address = addresses[0];
+    const proxied = self.proxy = proxy.createProxyServer({target: 'http://' + ip + ':' + self.port});
+
+    proxied.on('proxyReq', function onProxyReq(proxyReq, req, res, options) {
+      proxyReq.setHeader('Host', self.host + ':' + self.port);
+    });
+
+    const server = self.server = http.createServer(function onRequest(req, res) {
+      if (req.url[0] != '/') return res.end();
+
+      if (req.url === '/servers/list.en') {
+        const writeHead = res.writeHead;
+        const write = res.write;
+        const end = res.end;
+        var data = '';
+
+        res.writeHead = function _writeHead(code, headers) {
+          res.removeHeader('Content-Length');
+          if (headers) delete headers['content-length'];
+          writeHead.apply(res, arguments);
+        };
+
+        res.write = function _write(chunk) {
+          data += chunk;
+        };
+
+        res.end = function _end(chunk) {
+          if (chunk) data += chunk;
+
+          const doc = new xmldom.DOMParser().parseFromString(data, 'text/xml');
+          const servers = Array.from(doc.getElementsByTagName('server'));
+          for (let server of servers) {
+            for (let node of Array.from(server.childNodes)) {
+              if (node.nodeType === 1 && node.nodeName === 'id') {
+                const settings = self.customServers[node.textContent];
+                if (settings) {
+                  if (!settings.overwrite) {
+                    let parent = server.parentNode;
+                    server = server.cloneNode(true);
+                    parent.appendChild(server);
+                  }
+                  for (let n of Array.from(server.childNodes)) {
+                    if (n.nodeType !== 1) continue; // ensure type: element
+                    switch (n.nodeName) {
+                      case 'ip':
+                        n.textContent = (typeof settings.ip !== 'undefined') ? settings.ip : '127.0.0.1';
+                        break;
+
+                      case 'port':
+                        if (typeof settings.port !== 'undefined') {
+                          n.textContent = settings.port;
+                        }
+                        break;
+
+                      case 'name':
+                        if (typeof settings.name !== 'undefined') {
+                          for (let c of Array.from(n.childNodes)) {
+                            if (c.nodeType === 4) { // CDATA_SECTION_NODE
+                              c.data = settings.name;
+                              break;
+                            }
+                          }
+                          for (let a of Array.from(n.attributes)) {
+                            if (a.name === 'raw_name') {
+                              a.value = settings.name;
+                              break;
+                            }
+                          }
+                        }
+                        break;
+
+                      case 'crowdness':
+                        if (!settings.overwrite) {
+                          //n.textContent = 'None';
+                          for (let a of Array.from(n.attributes)) {
+                            if (a.name === 'sort') {
+                              // 0 crowdness makes this server highest priority
+                              // if there are multiple servers with this ID
+                              a.value = '0';
+                              break;
+                            }
+                          }
+                        }
+                        break;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          data = new xmldom.XMLSerializer().serializeToString(doc);
+          write.call(res, data, 'utf8');
+          end.call(res);
+        };
+      }
+
+      proxied.web(req, res, function (err) {
+        console.warn('* error proxying request');
+        console.warn(err);
+        console.warn();
+        res.end();
+      });
+    });
+
+    server.listen(self.port, '127.0.0.1', callback);
+  });
+};
+
+SlsProxy.prototype.close = function close() {
+  if (this.server !== null) this.server.close();
+  hosts.remove('127.0.0.1', this.host);
+};
+
+/***********
+ * exports *
+ ***********/
+module.exports = SlsProxy;
