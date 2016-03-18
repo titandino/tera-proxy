@@ -1,6 +1,0 @@
-int32  currentMp
-int32  maxMp
-int32  diff
-uint32 type
-uint64 target
-uint64 source

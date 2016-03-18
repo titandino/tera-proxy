@@ -1,7 +1,0 @@
-int32  curHp
-int32  maxHp
-int32  diff
-int32  type
-uint64 target
-uint64 source
-byte   crit
