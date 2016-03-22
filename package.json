@@ -11,11 +11,9 @@
     "url": "https://github.com/meishuu/tera-proxy/issues"
   },
   "homepage": "https://github.com/meishuu/tera-proxy#readme",
-  "bundledDependencies": [
-    "tera-proxy-game",
-    "tera-proxy-sls"
-  ],
   "dependencies": {
-    "tera-data": "github:meishuu/tera-data"
+    "tera-data": "github:meishuu/tera-data",
+    "tera-proxy-game": "github:meishuu/tera-proxy-game",
+    "tera-proxy-sls": "github:meishuu/tera-proxy-sls"
   }
 }

@@ -2,6 +2,8 @@
 fs = require 'fs'
 path = require 'path'
 
+hosts = require './hosts'
+
 SlsProxy = require 'tera-proxy-sls'
 GameProxy = require 'tera-proxy-game'
 
@@ -22,6 +24,7 @@ cleanExit = ->
   console.log 'terminating...'
   proxy?.close()
   server?.close()
+  try hosts.remove '127.0.0.1', 'sls.service.enmasse.com'
   process.stdin.end() if process.platform is 'win32'
   setTimeout (-> process.exit()), 5000
     .unref()
@@ -44,7 +47,7 @@ proxy = new SlsProxy customServers:
 # remove entry from hosts file in case of bad shutdown
 # also catch errors with modifying hosts file
 try
-  proxy.close()
+  hosts.remove '127.0.0.1', 'sls.service.enmasse.com'
 catch e
   switch e.code
     when 'EACCES'
@@ -96,6 +99,7 @@ proxy?.fetch (err, servers) ->
     (dispatch) -> dispatch.load name, module for name in modules
 
   proxy.listen '127.0.0.1', ->
+    hosts.set '127.0.0.1', 'sls.service.enmasse.com'
     console.log "[sls] server list overridden"
 
     server.listen 9247, '127.0.0.1', ->
