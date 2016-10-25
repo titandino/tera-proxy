@@ -7,6 +7,9 @@
     "url": "git+https://github.com/meishuu/tera-proxy.git"
   },
   "author": "meishu",
+  "engines": {
+    "node": ">=6.0.0"
+  },
   "bugs": {
     "url": "https://github.com/meishuu/tera-proxy/issues"
   },
