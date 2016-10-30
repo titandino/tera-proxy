@@ -5,12 +5,13 @@ try {
 
 // requires
 const fs = require('fs');
+const net = require('net');
 const path = require('path');
 
 const hosts = require('./hosts');
 
 const SlsProxy = require('tera-proxy-sls');
-const GameProxy = require('tera-proxy-game');
+const { Connection, RealClient } = require('tera-proxy-game');
 
 // check if hosts is writable
 try {
@@ -99,8 +100,37 @@ proxy.fetch((err, gameServers) => {
       continue;
     }
 
-    const server = GameProxy.createServer({ host: target.ip, port: target.port }, (dispatch) => {
-      for (let name of modules) dispatch.load(name, module);
+    const server = net.createServer((socket) => {
+      socket.setNoDelay(true);
+
+      const connection = new Connection();
+      const client = new RealClient(connection, socket);
+      const srvConn = connection.connect(client, { host: target.ip, port: target.port });
+
+      for (let name of modules) {
+        connection.dispatch.load(name, module);
+      }
+
+      // logging
+      let remote = '???';
+
+      socket.on('error', (err) => {
+        console.warn(err);
+      });
+
+      srvConn.on('connect', () => {
+        remote = socket.remoteAddress + ':' + socket.remotePort;
+        console.log('[connection] routing %s to %s:%d',
+          remote, srvConn.remoteAddress, srvConn.remotePort);
+      });
+
+      srvConn.on('error', (err) => {
+        console.warn(err);
+      });
+
+      srvConn.on('close', () => {
+        console.log('[connection] %s disconnected', remote);
+      });
     });
 
     servers.set(id, server);
