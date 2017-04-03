@@ -1,0 +1,63 @@
+int32 curHp
+int32 curMp
+int32 unk1
+int32 maxHp
+int32 maxMp
+int32 basePower
+int32 baseEndurance
+int32 baseImpactFactor
+int32 baseBalanceFactor
+int16 baseMovementSpeed
+int16 unk2
+int16 baseAttackSpeed
+float baseCritRate
+float baseCritResist
+float baseCritPower
+int32 baseAttack
+int32 baseAttack2
+int32 baseDefense
+int32 baseImpact
+int32 baseBalance
+float baseResistWeakening
+float baseResistPeriodic
+float baseResistStun
+int32 bonusPower
+int32 bonusEndurance
+int32 bonusImpactFactor
+int32 bonusBalanceFactor
+int16 bonusMovementSpeed
+int16 unk3
+int16 bonusAttackSpeed
+float bonusCritRate
+float bonusCritResist
+float bonusCritPower
+int32 bonusAttack
+int32 bonusAttack2
+int32 bonusDefense
+int32 bonusImpact
+int32 bonusBalance
+float bonusResistWeakening
+float bonusResistPeriodic
+float bonusResistStun
+uint16 level1
+byte unk4 # 0, 1
+uint32 unk5 # flags?
+int32 bonusHp # from stamina
+int32 bonusMp
+int32 curStamina
+int32 maxStamina
+int32 curRe # also chi, willpower, etc
+int32 maxRe
+int32 bonusRe
+int32 unk6
+int32 itemLevelInventory
+int32 itemLevel
+int32 edge
+uint16 unk7 # 0?
+uint16 unk8 # flags?
+int32 unk9  # 0x1F40 = 8000
+int32 unk10 # 3
+int32 level2
+float unk12 # 1000
+uint32 unk13 # 0?
+float unk14 # 1

@@ -1,0 +1,91 @@
+﻿count  icons
+offset icons
+count  unk
+offset unk
+offset name
+offset guild
+offset guildRank
+offset details
+count  details
+offset guildEmblem
+offset details2
+count  details2
+
+uint32 serverId
+uint32 playerId
+uint64 cid
+float  x
+float  y
+float  z
+int16  w
+int32  relation
+uint32 model
+int16  unk1 # always 0?
+int16  unk2
+int16  unk3
+int16  unk4 # always 0?
+int16  unk5 # 0-3?
+byte   unk6 # always 1?
+byte   unk7 # boolean? (alive?)
+uint64 appearance # TODO 8 byte buffer?
+int32  weapon
+int32  chest
+int32  gloves
+int32  boots
+int32  inner
+int32  head
+int32  face
+int32  unk10 # 0,1,3?
+int32  unk11
+int32  unk11b
+int32  unk12
+int32  unk13 # always 0?
+int32  unk14 # always 0?
+byte   unk15 # always 0?
+int16  unk16 # boolean?
+int32  weaponModel
+int32  chestModel
+int32  glovesModel
+int32  bootsModel
+int32  weaponDye # always 0?
+int32  chestDye
+int32  glovesDye
+int32  bootsDye
+int32  unk25 # always 0?
+int32  unk26a
+int32  unk26b
+int32  unk26c
+int32  unk26d
+int32  weaponEnchant
+int16  unk27 # always 0?
+int32  level
+int32  unk28 # always 0?
+int32  unk29 # always 0?
+byte   unk30 # boolean?
+int32  hairAdornment
+int32  mask
+int32  back
+int32  weaponSkin
+int32  costume
+int32  costumeDye # ?
+int32  unk37
+int32  unk38
+byte   unk39 # boolean?
+byte   unk43 # always 1?
+int32  unk44
+int32  unk45 # always 0?
+int32  unk46 # 0 or 64?
+float  unk47 # always 1.0?
+
+string name
+string guild
+string guildRank
+bytes  details
+string guildEmblem
+bytes  details2
+
+array  icons
+- int32 icon
+
+array  unk
+- int32 unk

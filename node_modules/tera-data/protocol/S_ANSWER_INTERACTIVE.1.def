@@ -1,0 +1,6 @@
+offset name
+
+int32 unk
+int32 model
+int32 level
+string name

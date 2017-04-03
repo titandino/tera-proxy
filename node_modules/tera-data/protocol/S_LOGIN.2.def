@@ -1,0 +1,91 @@
+offset name
+offset details
+count  details
+offset details2
+count  details2
+
+# (model - 100) / 200 % 50 = race
+#     0 = human, 1 = high elf, 2 = aman, 3 = castanic,
+#     4 = popori, 5 = baraka
+# model / 100 % 2 = gender
+#     0 = female, 1 = male
+# model % 100 = class (one-based)
+#     warrior = 1, lancer = 2, slayer = 3, berserker = 4,
+#     sorcerer = 5, archer = 6, priest = 7, mystic = 8,
+#     reaper = 9, gunner = 10, brawler = 11, ninja = 12,
+#     valkyrie = 13
+uint32 model
+
+uint64 cid
+uint32 serverId
+uint32 playerId
+int32  unk1
+byte   unk2
+int32  unk3
+int32  unk4
+int32  unk5
+uint64 appearance
+int16  unk6
+uint16 level
+uint16 gatherEnergy
+uint16 gatherUnk # 0
+uint16 gatherPlants
+uint16 gatherMining
+int32  unk7
+int32  unk8
+int16  unk9
+uint64 expTotal
+uint64 expShown
+uint64 expNeeded
+int32  unk10
+int32  unk10b
+int32  unk10c
+int32  unk10d
+uint32 restedCurrent
+uint32 restedMax
+float  unk11
+int32  unk12
+uint32 weapon # item ids
+uint32 chest
+uint32 gloves
+uint32 boots
+uint32 innerwear
+uint32 circlet
+uint32 mask
+int32  unk13
+int32  unk14
+byte   unk15
+int32  unk16
+int32  unk17
+uint32 title # achievement id
+int32  weaponModel
+int32  chestModel
+int32  glovesModel
+int32  bootsModel
+int32  unk19
+int32  unk20
+int32  unk21
+int32  unk22
+int32  unk23
+int32  unk24
+int32  unk25
+int32  unk26
+int32  weaponEnchantment # 0-15
+int32  unk27
+byte   unk28
+byte   unk29
+uint32 hairAdornment # item ids
+uint32 mask
+uint32 back
+uint32 weaponSkin
+uint32 costume
+int32  unk30
+int32  unk31
+int32  unk32
+int32  unk33
+int32  unk34
+int32  unk35
+int16  unk36
+string name
+bytes  details
+bytes  details2

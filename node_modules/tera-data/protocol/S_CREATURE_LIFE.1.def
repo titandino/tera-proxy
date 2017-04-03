@@ -1,0 +1,6 @@
+uint64 target
+object location
+- float x
+- float y
+- float z
+bool alive

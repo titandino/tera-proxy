@@ -1,0 +1,8 @@
+uint32  curHp
+uint32  maxHp
+int32  diff
+uint32  type
+uint64 target
+uint64 source
+byte   unk1 # 0?
+uint32 unk2
