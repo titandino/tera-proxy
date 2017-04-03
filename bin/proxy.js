@@ -1,8 +1,3 @@
-let why;
-try {
-  why = require('why-is-node-running');
-} catch (_) {}
-
 // requires
 const fs = require('fs');
 const net = require('net');
@@ -151,14 +146,6 @@ proxy.fetch((err, gameServers) => {
   });
 
   // set up exit handling
-  if (process.platform === 'win32') {
-    require('readline')
-      .createInterface({ input: process.stdin, output: process.stdout })
-      .on('SIGINT', () => {
-        process.emit('SIGINT');
-      });
-  }
-
   function cleanExit() {
     console.log('terminating...');
 
@@ -168,18 +155,34 @@ proxy.fetch((err, gameServers) => {
 
     proxy.close();
     servers.forEach(server => server.close());
+  }
+
+  function dirtyExit() {
+    cleanExit();
 
     if (process.platform === 'win32') {
       process.stdin.end();
     }
 
     setTimeout(() => {
-      why && why();
       process.exit();
     }, 5000).unref();
-  };
+  }
 
-  process.on('SIGHUP', cleanExit);
-  process.on('SIGINT', cleanExit);
-  process.on('SIGTERM', cleanExit);
+  if (process.versions.electron) {
+    require('electron').app.on('will-quit', cleanExit);
+    return;
+  }
+
+  if (process.platform === 'win32') {
+    require('readline')
+      .createInterface({ input: process.stdin, output: process.stdout })
+      .on('SIGINT', () => {
+        process.emit('SIGINT');
+      });
+  }
+
+  process.on('SIGHUP', dirtyExit);
+  process.on('SIGINT', dirtyExit);
+  process.on('SIGTERM', dirtyExit);
 });
