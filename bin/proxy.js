@@ -5,6 +5,10 @@ const path = require('path');
 
 const hosts = require('./hosts');
 
+const logger = require('baldera-logger');
+logger.consoleLevel('error');
+logger.logToFile(path.join(__dirname, 'baldera.log'));
+
 const SlsProxy = require('tera-proxy-sls');
 const { Connection, RealClient } = require('tera-proxy-game');
 

@@ -15,8 +15,9 @@
   },
   "homepage": "https://github.com/meishuu/tera-proxy#readme",
   "dependencies": {
-    "tera-data": "github:meishuu/tera-data",
-    "tera-proxy-game": "github:meishuu/tera-proxy-game",
-    "tera-proxy-sls": "github:meishuu/tera-proxy-sls"
+    "baldera-logger": "meishuu/baldera-logger",
+    "tera-data": "meishuu/tera-data",
+    "tera-proxy-game": "meishuu/tera-proxy-game",
+    "tera-proxy-sls": "meishuu/tera-proxy-sls"
   }
 }
