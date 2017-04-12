@@ -1,14 +1,13 @@
-let why;
-try {
-  why = require('why-is-node-running');
-} catch (_) {}
-
 // requires
 const fs = require('fs');
 const net = require('net');
 const path = require('path');
 
 const hosts = require('./hosts');
+
+const logger = require('baldera-logger');
+logger.consoleLevel('error');
+logger.logToFile(path.join(__dirname, 'baldera.log'));
 
 const SlsProxy = require('tera-proxy-sls');
 const { Connection, RealClient } = require('tera-proxy-game');
@@ -151,14 +150,6 @@ proxy.fetch((err, gameServers) => {
   });
 
   // set up exit handling
-  if (process.platform === 'win32') {
-    require('readline')
-      .createInterface({ input: process.stdin, output: process.stdout })
-      .on('SIGINT', () => {
-        process.emit('SIGINT');
-      });
-  }
-
   function cleanExit() {
     console.log('terminating...');
 
@@ -168,18 +159,34 @@ proxy.fetch((err, gameServers) => {
 
     proxy.close();
     servers.forEach(server => server.close());
+  }
+
+  function dirtyExit() {
+    cleanExit();
 
     if (process.platform === 'win32') {
       process.stdin.end();
     }
 
     setTimeout(() => {
-      why && why();
       process.exit();
     }, 5000).unref();
-  };
+  }
 
-  process.on('SIGHUP', cleanExit);
-  process.on('SIGINT', cleanExit);
-  process.on('SIGTERM', cleanExit);
+  if (process.versions.electron) {
+    require('electron').app.on('will-quit', cleanExit);
+    return;
+  }
+
+  if (process.platform === 'win32') {
+    require('readline')
+      .createInterface({ input: process.stdin, output: process.stdout })
+      .on('SIGINT', () => {
+        process.emit('SIGINT');
+      });
+  }
+
+  process.on('SIGHUP', dirtyExit);
+  process.on('SIGINT', dirtyExit);
+  process.on('SIGTERM', dirtyExit);
 });
