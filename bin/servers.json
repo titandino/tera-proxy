@@ -6,4 +6,16 @@
   { "name": "Mount Tiltrannas"
   , "port": 9248
   }
+  , "4024":
+  { "name": "Ass Valley"
+  , "port": 9249
+  }
+  , "4004":
+  { "name": "Tempest Retards"
+  , "port": 9246
+  }
+    , "9091":
+  { "name": "Wonder Server"
+  , "port": 9250
+  }
 }
