@@ -4,3 +4,5 @@ object location
 - float y
 - float z
 bool alive
+byte unk1
+byte unk2
